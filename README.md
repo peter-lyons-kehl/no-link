@@ -12,7 +12,7 @@ following when you don't want linking stage to break:
   tests, integration tests, procedural macros or shared libraries.
 
 However, this crate does NOT break _compilation_ stage, only the **linking** stage. If you use it in
-your (standard, static) **library** crate, `cargo build` will succeed - because it does _not_
+your (standard, static) **library** crate, `cargo build` _will_ succeed - because it does _not_
 involve linking. (The only exception: If you import this crate in a procedural macro, and then you
 use that macro in any other crate, that other crate's `cargo build` and even `cargo check` **will**
 fail, because those stages execute the procedural macro.)
@@ -34,19 +34,19 @@ Book > cargo-package](https://doc.rust-lang.org/cargo/commands/cargo-package.htm
    no-link = { version = "0.1.0", path = "../no-link"}
    ```
 
-   or (for tests only):
+   or (for tests/doctests only):
 
    ```toml
    [dev-dependencies]
    no-link = { version = "0.1.0", path = "../no-link"}
    ```
-   You _don't_ need to make it an optional dependency - it's enough to make its import below
-   conditional.
+   You _don't_ need to make it an optional dependency - it's enough to make its import conditional.
+   See below.
 2. Import it. You most likely want that to be under some [conditional
    compilation](https://doc.rust-lang.org/nightly/reference/conditional-compilation.html). For
    example:
    ```rust
-   #[cfg( feature = "feature-name-when-you-want-linking-to-fail")]
+   #[cfg( feature = "feature-name-when-you-want-linking-to-fail" )]
    #[allow(unused_imports)]
    use no_link::*;
    ```
@@ -54,6 +54,14 @@ Book > cargo-package](https://doc.rust-lang.org/cargo/commands/cargo-package.htm
    or, if you care about your namespace:
 
    ```rust
-   #[cfg( feature = "feature-name-when-you-want-linking-to-fail")]
+   #[cfg( feature = "feature-name-when-you-want-linking-to-fail" )]
    use no_link::no_link as _;
    ```
+
+## Zero cost abstraction
+
+- No dependencies.
+- Zero size/memory/speed cost and no modifications to any binaries/shared libraries (since those can
+  get build only if `no-link` is _not_ imported).
+- Minimum build time cost: Small, no proc macros used. Its build script [build.rs](build.rs) is
+  lightweight.
