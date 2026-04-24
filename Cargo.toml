@@ -3,4 +3,16 @@ name = "no-link"
 version = "0.1.0"
 edition = "2018"
 
+license = "BSD-2-Clause OR Apache-2.0 OR MIT"
+
+authors = ["Peter Lyons Kehl<peter.kehl@gmail.com>"]
+description = "intentionally break any linking (linking stage)"
+
+categories = ["development-tools", "rust-patterns"]
+
+keywords = ["linking"]
+
+repository = "https://github.com/peter-lyons-kehl/no-link"
+homepage = "https://github.com/peter-lyons-kehl/no-link"
+
 [dependencies]
