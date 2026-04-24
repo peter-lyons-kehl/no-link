@@ -29,29 +29,32 @@ Book > cargo-package](https://doc.rust-lang.org/cargo/commands/cargo-package.htm
 ## How to use
 
 1. Add it to your crate's `Cargo.toml` -> `[dependencies]` or `[dev-dependencies]`, like:
+
    ```toml
    [dependencies]
-   no-link = { version = "0.1.0", path = "../no-link"}
+   no-link = version = "0.1.0"
    ```
 
    or (for tests/doctests only):
 
    ```toml
    [dev-dependencies]
-   no-link = { version = "0.1.0", path = "../no-link"}
+   no-link = version = "0.1.0"
    ```
+
    You _don't_ need to make it an optional dependency - it's enough to make its import conditional.
    See below.
 2. Import it. You most likely want that to be under some [conditional
    compilation](https://doc.rust-lang.org/nightly/reference/conditional-compilation.html). For
    example:
+
    ```rust
    #[cfg( feature = "feature-name-when-you-want-linking-to-fail" )]
    #[allow(unused_imports)]
    use no_link::*;
    ```
 
-   or, if you care about your namespace:
+   or, to make it explicit that it doesn't touch your namespace:
 
    ```rust
    #[cfg( feature = "feature-name-when-you-want-linking-to-fail" )]
