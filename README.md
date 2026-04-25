@@ -32,14 +32,14 @@ Book > cargo-package](https://doc.rust-lang.org/cargo/commands/cargo-package.htm
 
    ```toml
    [dependencies]
-   no-link = version = "0.1.0"
+   no-link = version = "0.2.0"
    ```
 
    or (for tests/doctests only):
 
    ```toml
    [dev-dependencies]
-   no-link = version = "0.1.0"
+   no-link = version = "0.2.0"
    ```
 
    You _don't_ need to make it an optional dependency - it's enough to make its import conditional.
@@ -50,16 +50,13 @@ Book > cargo-package](https://doc.rust-lang.org/cargo/commands/cargo-package.htm
 
    ```rust
    #[cfg( feature = "feature-name-when-you-want-linking-to-fail" )]
-   #[allow(unused_imports)]
-   use no_link::*;
+   use no_link as _;
    ```
 
-   or, to make it explicit that it doesn't touch your namespace:
+## Negative tests
 
-   ```rust
-   #[cfg( feature = "feature-name-when-you-want-linking-to-fail" )]
-   use no_link::no_link as _;
-   ```
+If you want to test that (under some configuration) your crate will _not_ link, don't use `trybuild`
+crate (see [`prudent-rs/readme-code-extractor -> negative_tests_runner/src/lib.rs commit #ff8935f`](https://github.com/prudent-rs/readme-code-extractor/blob/ff8935ff314133ddc432c32d0ec89c41f4dd0dd0/negative_tests_runner/src/lib.rs)).
 
 ## Zero cost abstraction
 
