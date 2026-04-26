@@ -53,10 +53,19 @@ Book > cargo-package](https://doc.rust-lang.org/cargo/commands/cargo-package.htm
    use no_link as _;
    ```
 
+See also [`separate_test_crate/`](separate_test_crate/).
+
 ## Negative tests
 
 If you want to test that (under some configuration) your crate will _not_ link, don't use `trybuild`
-crate (see [`prudent-rs/readme-code-extractor -> negative_tests_runner/src/lib.rs commit #ff8935f`](https://github.com/prudent-rs/readme-code-extractor/blob/ff8935ff314133ddc432c32d0ec89c41f4dd0dd0/negative_tests_runner/src/lib.rs)).
+crate (see [`prudent-rs/readme-code-extractor` -> negative_tests_runner/src/lib.rs (commit
+ff8935f)](https://github.com/prudent-rs/readme-code-extractor/blob/ff8935ff314133ddc432c32d0ec89c41f4dd0dd0/negative_tests_runner/src/lib.rs)).
+Use crate [snapbox](https://docs.rs/snapbox/latest/snapbox/).
+
+See also [`prudent-rs/readme-code-extractor` -> negative_tests_runner/src/lib.rs (commit
+1793008)](https://github.com/prudent-rs/readme-code-extractor/blob/1793008f755a6854543b39162b5917f686265184/negative_tests_runner/src/lib.rs),
+which does _not_ use `no_link`, but it verifies/tests an expected linking failure (generated with
+`dtolnay/no_panic`).
 
 ## Zero cost abstraction
 
