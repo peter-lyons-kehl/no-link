@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+
+Documentation. Now marked as `#![no_std]`-compatible.
+
 ## 0.2.0
 
 Zero code - no need for a unit constant to be exported, see [README.md](/README.md). Added
