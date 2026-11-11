@@ -41,19 +41,20 @@ cargo-package](https://doc.rust-lang.org/cargo/commands/cargo-package.html).
 
    ```toml
    [dependencies]
-   no-link = version = "0.2.0"
+   no-link = version = "0.2.2"
    ```
 
    or (for tests/doctests only):
 
    ```toml
    [dev-dependencies]
-   no-link = version = "0.2.0"
+   no-link = version = "0.2.2"
    ```
 
    You can, but _don't_ have to, make it an optional dependency - it's enough to
-   make its import conditional. See below.
-2. Import it. You most likely want that to be under some [conditional
+   make its _import_ conditional. See below.
+2. Import it (in Rust source code). You most likely want that to be under
+   [conditional
    compilation](https://doc.rust-lang.org/nightly/reference/conditional-compilation.html).
    For example:
 

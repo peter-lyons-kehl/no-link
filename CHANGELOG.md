@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2
+
+Documentation.
+
 ## 0.2.1
 
 Documentation. Now marked as `#![no_std]`-compatible.
